@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, StatusBar, Image, TouchableOpacity, LayoutAnimation } from 'react-native';
+import { View, Text, StatusBar, Image, TouchableOpacity, UIManager, LayoutAnimation } from 'react-native';
 import FundoOndulado from '../../componentes/FundoOndulado';
 import { TelaDeFundo } from '../../componentes/TelaDeFundo';
 import { Formulario } from '../../componentes/Formulario';
 import itens from './cards';
 import styles from './styles';
 import Carousel from '../../componentes/Carousel'
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 export default function Onboarding({ navigation }) {
   const [fazerLogin, setFazerLogin] = useState(false);
@@ -26,8 +32,8 @@ export default function Onboarding({ navigation }) {
     if (fazerLogin) {
       navigation.navigate('Principal');
     } else {
-      setAltura(400);
       LayoutAnimation.linear()
+      setAltura(400);
       setFazerLogin(true);
     }
   }
