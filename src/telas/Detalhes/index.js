@@ -8,7 +8,7 @@ import styles from './styles';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 
 export default function Detalhes(props) {
-  const [animated, setAnimated] = useState(false)
+  const [isAnimated, setIsAnimated] = useState(false)
   const dados = props.route.params
   const rotation = useSharedValue(0)
   const angle = -45
@@ -21,9 +21,9 @@ export default function Detalhes(props) {
   })
   
   function rotate() {
-    rotate.value = withRepeat(withTiming(angle, {duration: 120}), 6, true)
+    rotation.value = withRepeat(withTiming(angle, {duration: 120}), 6, true)
     setTimeout(() => {
-      setAnimated(true)
+      setIsAnimated(true)
     }, 1000);
   }
 
@@ -64,7 +64,7 @@ export default function Detalhes(props) {
             <Text style={styles.botaoTexto}>Notificar consulta</Text>
               <Animated.View style={[styles.icone, animationStyle]}>
                 <Icon 
-                  name={ animated ? 'notifications' : 'notifications-none'} 
+                  name={ isAnimated ? 'notifications' : 'notifications-none'} 
                   size={20} 
                   color="#FFF"
                 />
