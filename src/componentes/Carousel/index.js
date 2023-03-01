@@ -9,7 +9,7 @@ export default function Carousel({data}) {
 
   function changeVectorPosition() {
     if (myIndex < data.length - 1)
-      setMyIndex(myIndex++)
+      setMyIndex(myIndex + 1)
     else
       setMyIndex(0)
   }

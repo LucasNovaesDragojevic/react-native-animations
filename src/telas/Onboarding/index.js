@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StatusBar, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StatusBar, Image, TouchableOpacity, LayoutAnimation } from 'react-native';
 import FundoOndulado from '../../componentes/FundoOndulado';
 import { TelaDeFundo } from '../../componentes/TelaDeFundo';
 import { Formulario } from '../../componentes/Formulario';
@@ -11,11 +11,23 @@ export default function Onboarding({ navigation }) {
   const [fazerLogin, setFazerLogin] = useState(false);
   const [altura, setAltura] = useState(250);
 
+  const customAnimaion = {
+    duration: 1500,
+    create: {
+      type: LayoutAnimation.Types.spring,
+      property: LayoutAnimation.Properties.scaleXY,
+      springDamping: 0.7
+    }
+  }
+
+  LayoutAnimation.configureNext(customAnimaion)
+
   function avancar() {
     if (fazerLogin) {
       navigation.navigate('Principal');
     } else {
       setAltura(400);
+      LayoutAnimation.linear()
       setFazerLogin(true);
     }
   }
